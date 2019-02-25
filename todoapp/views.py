@@ -10,5 +10,5 @@ def index(request):
     return HttpResponse(output)
 
 
-def detail(request):
-    return HttpResponse('This is details page')
+def detail(request, task_id):
+    return HttpResponse('This is task #%s' % task_id)
