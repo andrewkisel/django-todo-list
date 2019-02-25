@@ -10,5 +10,5 @@ def index(request):
 
 
 def detail(request, task_id):
-    task = Task.objects.get(pk=task_id)
+    task = get_object_or_404(Task, id=task_id)
     return render(request, 'todoapp/detail.html', context={'task': task})
