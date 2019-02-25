@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import HttpResponse
 from .models import Task
 
@@ -10,4 +10,5 @@ def index(request):
 
 
 def detail(request, task_id):
-    return HttpResponse('This is task #%s' % task_id)
+    task = Task.objects.get(pk=task_id)
+    return render(request, 'todoapp/detail.html', context={'task': task})
