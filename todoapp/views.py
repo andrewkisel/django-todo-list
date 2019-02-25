@@ -6,8 +6,7 @@ from .models import Task
 # Create your views here.
 def index(request):
     tasks = Task.objects.all()
-    output = ','.join(q.task_name for q in tasks)
-    return HttpResponse(output)
+    return render(request, 'todoapp/index.html', context={'tasks': tasks})
 
 
 def detail(request, task_id):

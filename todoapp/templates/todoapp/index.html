@@ -1,0 +1,7 @@
+{% if tasks %}
+    {% for task in tasks %}
+    <li>
+        <a href="#">{{ task.task_name }}</a>
+    </li>
+    {% endfor %}
+{% endif %}
