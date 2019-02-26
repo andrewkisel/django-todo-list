@@ -1,14 +1,34 @@
 {% extends 'base.html' %}
-{% block title %}Task Details{% endblock %}
+
+{% block title %}Modify a task{% endblock %}
+
 {% block body %}
-<div>
-    <h1>{{ task.task_title }}</h1>
-        <p class="lead">
-            {{ task.task_text }}
-            <br>
-            <strong>Priority:</strong> {{ task.get_task_priority_display }}
-            <br>
-            <strong>Status:</strong> {{ task.get_task_status_display }}
-        </p>
+<div class="text-center" style="" xmlns="http://www.w3.org/1999/html">
+<form method="POST" action="{% url 'detail' task.id %}">
+    <h1 class="h3 mb-3 font-weight-normal">Modify a task</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input id="task_title" type="text" class="form-control" name="task_title" value="{{ task.task_title }}" placeholder="Task Title">
+    <br>
+    <textarea id="task_text" class="form-control" rows="3" name="task_text" placeholder="Task Text">{{ task.task_text }}</textarea>
+    <br>
+    <select class="form-control" name="task_priority">
+        <option value="{{ task.task_priority }}" selected>{{ task.get_task_priority_display }}</option>
+        <option value="LO">Low</option>
+        <option value="ME">Medium</option>
+        <option value="HI">High</option>
+        <option value="UR">Urgent</option>
+    </select>
+    <br>
+    <select class="form-control" name="task_status">
+        <option value="{{ task.task_status }}" selected>{{ task.get_task_status_display }}</option>
+        <option value="AC">Active</option>
+        <option value="IP">In Progress</option>
+        <option value="CD">Closed</option>
+    </select>
+    <br>
+    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Go!</button>
+    <input type="hidden" name="next" value="{{ next }}">
+</form>
 </div>
 {% endblock %}

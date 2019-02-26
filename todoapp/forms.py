@@ -1,7 +1,14 @@
 from django import forms
+from .models import Task
 
 
-class NewTask(forms.Form):
-    task_title = forms.CharField(widget=forms.Textarea, label='task_title')
-    task_text = forms.CharField(widget=forms.Textarea, label='task_text')
-    task_priority = forms.CharField(widget=forms.Textarea, label='task_priority')
+class NewTask(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['task_title', 'task_text', 'task_priority']
+
+
+class ModifyTask(forms.ModelForm):
+    class Meta:
+        model = Task
+        fields = ['task_title', 'task_text', 'task_priority', 'task_status']

@@ -4,9 +4,11 @@
     <div class="row">
     {% for task in tasks %}
           <div class="col-md-4">
-            <h2>{{ task.task_title }}</h2>
+              <a style="color: black" href="{% url 'detail' task.id %}"><h2>{{ task.task_title }}</h2></a>
               <p>{{ task.task_text }}</p>
-            <p><a class="btn btn-secondary" href="{% url 'detail' task.id %}" role="button">View details &raquo;</a></p>
+                <strong>Priority:</strong> {{ task.get_task_priority_display }}
+                <br>
+                <strong>Status:</strong> {{ task.get_task_status_display }}
           </div>
     {% endfor %}
     </div>

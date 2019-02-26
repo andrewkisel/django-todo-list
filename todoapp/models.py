@@ -7,7 +7,7 @@ class Task(models.Model):
     def __str__(self):
         return self.task_title
     ACTIVE = 'AC'
-    COMPLETE = 'CM'
+    INPROGRESS = 'IP'
     CLOSED = 'CD'
 
     LOW = 'LO'
@@ -17,7 +17,7 @@ class Task(models.Model):
 
     STATUS_CHOICES = (
         (ACTIVE, 'Active'),
-        (COMPLETE, 'Complete'),
+        (INPROGRESS, 'In Progress'),
         (CLOSED, 'Closed')
     )
 
