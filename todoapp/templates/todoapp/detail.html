@@ -1,6 +1,14 @@
-{% extends 'todoapp/base.html' %}
+{% extends 'base.html' %}
+{% block title %}Task Details{% endblock %}
 {% block body %}
-{{ task.task_name }}
-<br>
-{{ task.priority }}
+<div class="align-items-center">
+<h1>{{ task.task_title }}</h1>
+    <p class="lead">
+        {{ task.task_text }}
+        <br>
+        <strong>Priority:</strong> {{ task.priority }}
+        <br>
+        <strong>Status:</strong> {{ task.get_task_status_display }}
+    </p>
+</div>
 {% endblock %}

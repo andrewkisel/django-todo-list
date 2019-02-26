@@ -4,7 +4,7 @@ from .models import Task
 
 # Register your models here.
 class TaskAdmin(admin.ModelAdmin):
-    list_display = ['task_name', 'priority']
+    list_display = ['task_title', 'priority']
 
 
 admin.site.register(Task, TaskAdmin)
