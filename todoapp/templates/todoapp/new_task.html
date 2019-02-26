@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block title %}Create New Task{% endblock %}
+
+{% block body %}
+<div class="text-center" style="" xmlns="http://www.w3.org/1999/html">
+<form method="POST" action="{% url 'new_task' %}">
+    <h1 class="h3 mb-3 font-weight-normal">Create a New Task</h1>
+        {% csrf_token %}
+        {{ form.as_p }}
+    <input id="task_title" type="text" class="form-control" name="task_title" value="" placeholder="Task Title">
+    <br>
+    <textarea id="task_text" class="form-control" rows="3" name="task_text" placeholder="Task Text"></textarea>
+    <br>
+    <select class="form-control" name="task_priority">
+        <option value="" disabled selected>Set priority</option>
+        <option value="LO">Low</option>
+        <option value="ME">Medium</option>
+        <option value="HI">High</option>
+        <option value="UR">Urgent</option>
+    </select>
+    <br>
+  <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Go!</button>
+  <input type="hidden" name="next" value="{{ next }}">
+</form>
+</div>
+{% endblock %}
