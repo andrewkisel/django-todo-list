@@ -1,7 +1,6 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
 from .forms import NewTask, ModifyTask
-from django.http import HttpResponse
 
 
 # Create your views here.
@@ -19,14 +18,15 @@ def detail(request, task_id):
         if request.method == 'POST':
             form = ModifyTask(request.POST)
             if form.is_valid():
-                task.task_title = form.cleaned_data.get('task_title')
-                task.task_text = form.cleaned_data.get('task_text')
-                task.task_priority = form.cleaned_data.get('task_priority')
-                task.task_status = form.cleaned_data.get('task_status')
-                task.save()
+                if 'Save' in request.POST:
+                    task.task_title = form.cleaned_data.get('task_title')
+                    task.task_text = form.cleaned_data.get('task_text')
+                    task.task_priority = form.cleaned_data.get('task_priority')
+                    task.task_status = form.cleaned_data.get('task_status')
+                    task.save()
+                elif 'Delete' in request.POST:
+                    task.delete()
                 return redirect('index')
-            else:
-                return HttpResponse('Form is not valid.')
         else:
             return render(request, 'todoapp/detail.html', context={'task': task})
     else:
