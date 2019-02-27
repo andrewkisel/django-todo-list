@@ -61,3 +61,21 @@ def new_task(request):
     else:
         return redirect('login')
     return render(request, 'todoapp/new_task.html')
+
+
+# Alternative code using generic views.
+
+# from django.views import generic
+# from .models import Task
+#
+#
+# class IndexView(generic.ListView):
+#     template_name = 'todoapp/index.html'
+#
+#     def get_queryset(self):
+#         return Task.objects.all()
+#
+#
+# class DetailView(generic.DetailView):
+#     model = Task
+#     template_name = 'todoapp/detail.html'
