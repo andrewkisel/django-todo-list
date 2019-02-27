@@ -1,10 +1,9 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
 from .forms import NewTask, ModifyTask, FilterTask
-from django.http import HttpResponse
 
 
-# Create your views here.
+# Index page.
 def index(request):
     if request.user.is_authenticated:
         tasks = Task.objects.all()
@@ -21,9 +20,11 @@ def index(request):
         return redirect('login')
 
 
+# Detail page.
 def detail(request, task_id):
     if request.user.is_authenticated:
         task = get_object_or_404(Task, id=task_id)
+        # Task modification logic.
         if request.method == 'POST':
             form = ModifyTask(request.POST)
             if form.is_valid():
@@ -42,8 +43,10 @@ def detail(request, task_id):
         return redirect('login')
 
 
+# New task page.
 def new_task(request):
     if request.user.is_authenticated:
+        # New task creation logic.
         if request.method == 'POST':
             form = NewTask(request.POST)
             if form.is_valid():

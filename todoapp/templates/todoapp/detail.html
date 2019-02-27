@@ -7,7 +7,6 @@
 <form method="POST" action="{% url 'detail' task.id %}">
     <h1 class="h3 mb-3 font-weight-normal">Modify a task</h1>
         {% csrf_token %}
-        {{ form.as_p }}
     <input id="task_title" type="text" class="form-control" name="task_title" value="{{ task.task_title }}" placeholder="Task Title">
     <br>
     <textarea id="task_text" class="form-control" rows="3" name="task_text" placeholder="Task Text">{{ task.task_text }}</textarea>
@@ -27,8 +26,8 @@
         <option value="CD">Closed</option>
     </select>
     <br>
-    <button class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Go!</button>
-    <input type="hidden" name="next" value="{{ next }}">
+    <button name="Save" class="btn btn-lg btn-primary btn-block" type="submit" value="Submit">Save Changes</button>
+    <button name="Delete" class="btn btn-lg btn-danger btn-block" type="submit" value="Submit">Delete Record</button>
 </form>
 </div>
 {% endblock %}
