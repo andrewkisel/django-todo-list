@@ -1,12 +1,21 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .models import Task
-from .forms import NewTask, ModifyTask
+from .forms import NewTask, ModifyTask, FilterTask
+from django.http import HttpResponse
 
 
 # Create your views here.
 def index(request):
     if request.user.is_authenticated:
         tasks = Task.objects.all()
+        if request.method == 'POST':
+            form = FilterTask(request.POST)
+            if 'AC' in request.POST:
+                tasks = tasks.filter(task_status='AC')
+            elif 'IP' in request.POST:
+                tasks = tasks.filter(task_status='IP')
+            elif 'CD' in request.POST:
+                tasks = tasks.filter(task_status='CD')
         return render(request, 'todoapp/index.html', context={'tasks': tasks})
     else:
         return redirect('login')

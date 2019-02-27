@@ -11,6 +11,8 @@
                 <strong>Status:</strong> {{ task.get_task_status_display }}
           </div>
     {% endfor %}
+        {% else %}
+        <h1>There are no tasks matching the filter</h1>
     </div>
 {% endif %}
 {% endblock %}
